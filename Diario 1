@@ -2,242 +2,179 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>✨ ¿Qué Princesa Disney Eres? ✨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>📊 Interpretación Escala CL-SPC</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            script: ['"Dancing Script"', 'cursive'],
-            sans: ['"Montserrat"', 'sans-serif']
-          },
-          colors: {
-            ariel: '#FF6F61',
-            belle: '#F9D71C',
-            jasmine: '#2E8B57',
-            moana: '#4682B4',
-            tiana: '#228B22',
-          }
-        }
-      }
-    }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
-      background: linear-gradient(135deg, #fdf6f0 0%, #f8e9f9 100%);
       font-family: 'Montserrat', sans-serif;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
+      background: linear-gradient(135deg, #f0f9ff 0%, #f8f4ff 100%);
     }
-    .princess-script {
-      font-family: 'Dancing Script', cursive;
+    .interpretation-card {
+      transition: all 0.3s ease;
     }
-    .radio-custom:checked + label {
-      background: linear-gradient(135deg, #ff9ec7, #a2d2ff);
-      color: white;
-      transform: scale(1.02);
-      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-    }
-    .sparkle {
-      position: absolute;
-      pointer-events: none;
-      opacity: 0.7;
-      z-index: 0;
-    }
-    @media (max-width: 640px) {
-      .text-5xl { font-size: 2.5rem; }
-      .text-3xl { font-size: 1.875rem; }
-      .px-4 { padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
-      .py-2 { padding-top: 0.375rem !important; padding-bottom: 0.375rem !important; }
-      .px-3 { padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
+    .interpretation-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
     }
   </style>
 </head>
-<body class="min-h-screen py-4 px-2 relative overflow-hidden">
-  <!-- Sparkles decorativos -->
-  <div class="sparkle" style="top:10%; left:5%; font-size:1.2rem;">✨</div>
-  <div class="sparkle" style="top:25%; right:8%; font-size:1rem;">💫</div>
-  <div class="sparkle" style="bottom:20%; left:10%; font-size:1.3rem;">🌟</div>
-  <div class="sparkle" style="bottom:30%; right:12%; font-size:1.1rem;">👑</div>
-
-  <div class="max-w-2xl mx-auto bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-5 border border-pink-100 relative z-10">
-    <div class="text-center mb-6">
-      <h1 class="text-5xl font-bold princess-script text-pink-600 mb-2">¿Qué Princesa Disney Eres?</h1>
-      <p class="text-gray-700 text-sm">Responde las preguntas y descubre tu alma de princesa 👑</p>
-      <div class="mt-3 text-2xl">🪄💖✨</div>
+<body class="min-h-screen py-6 px-4">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-purple-700">Escala de Clima Laboral CL-SPC</h1>
+      <p class="text-gray-600 mt-2">Ingresa tu puntaje total (50–250) para obtener una interpretación completa y enviarla por WhatsApp</p>
     </div>
 
-    <form id="surveyForm" class="space-y-4">
-      <!-- Preguntas se generarán aquí -->
-    </form>
-
-    <div class="text-center mt-6">
-      <button id="submitBtn" class="hidden bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-full text-lg transition shadow-lg w-full max-w-xs mx-auto">
-        ¡Descubrir mi princesa!
+    <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+      <div class="mb-5">
+        <label for="scoreInput" class="block text-sm font-medium text-gray-700 mb-2">Puntaje total:</label>
+        <input
+          type="number"
+          id="scoreInput"
+          min="50"
+          max="250"
+          placeholder="Ej. 166"
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:outline-none text-center text-lg"
+        />
+      </div>
+      <button
+        id="checkBtn"
+        class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg transition shadow-md"
+      >
+        Interpretar y preparar para WhatsApp
       </button>
     </div>
-  </div>
 
-  <!-- Resultado -->
-  <div id="resultSection" class="hidden max-w-xl mx-auto mt-8 bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 text-center border border-purple-100 relative z-10">
-    <h2 class="text-3xl font-bold princess-script text-purple-600 mb-4">¡Tu destino mágico!</h2>
-    <div id="princessResult" class="text-lg mb-5"></div>
-    <div id="whatsappBtnContainer" class="mt-5"></div>
-    <p class="mt-4 text-xs text-gray-500">
-      Comparte tu resultado con tus amigas hadas 🧚‍♀️
-    </p>
+    <div id="resultSection" class="hidden space-y-6">
+      <!-- Categoría -->
+      <div class="interpretation-card bg-white rounded-xl shadow p-5 border-l-4" id="categoryCard"></div>
+
+      <!-- Significado -->
+      <div class="interpretation-card bg-white rounded-xl shadow p-5">
+        <h3 class="font-bold text-lg text-gray-800 mb-2">🔍 ¿Qué significa este resultado?</h3>
+        <p id="meaningText" class="text-gray-700"></p>
+      </div>
+
+      <!-- Factores evaluados -->
+      <div class="interpretation-card bg-white rounded-xl shadow p-5">
+        <h3 class="font-bold text-lg text-gray-800 mb-2">📊 Variables (Factores) que evalúa la escala</h3>
+        <ul class="list-disc pl-5 space-y-1 text-gray-700">
+          <li><strong>Autorrealización:</strong> Oportunidades de crecimiento, desarrollo personal y profesional.</li>
+          <li><strong>Involucramiento Laboral:</strong> Compromiso con la organización y sus objetivos.</li>
+          <li><strong>Supervisión:</strong> Apoyo, orientación y retroalimentación de los jefes.</li>
+          <li><strong>Comunicación:</strong> Fluidez, claridad y acceso a la información relevante.</li>
+          <li><strong>Condiciones Laborales:</strong> Remuneración, tecnología, recursos y ambiente físico.</li>
+        </ul>
+      </div>
+
+      <!-- Recomendaciones -->
+      <div class="interpretation-card bg-white rounded-xl shadow p-5">
+        <h3 class="font-bold text-lg text-gray-800 mb-2">💡 Recomendaciones de mejora</h3>
+        <p id="recommendationsText" class="text-gray-700"></p>
+      </div>
+
+      <!-- Botón de WhatsApp -->
+      <div class="interpretation-card bg-white rounded-xl shadow p-5 text-center">
+        <h3 class="font-bold text-lg text-gray-800 mb-3">📲 ¿Quieres enviar esta interpretación?</h3>
+        <p class="text-gray-600 mb-4">Haz clic abajo para abrir WhatsApp con un mensaje listo para enviar al número <strong>+51984006844</strong>.</p>
+        <div id="whatsappBtnContainer"></div>
+      </div>
+
+      <div class="text-xs text-gray-500 mt-6 text-center">
+        Basado en el <em>Manual CL-SPC (Palma Carrillo, 2004)</em> – Muestra: 1,323 trabajadores de Lima Metropolitana.
+      </div>
+    </div>
   </div>
 
   <script>
-    // Preguntas del CL-SPC (50 ítems), reformuladas suavemente
-    const questions = [
-      "Existen oportunidades de progresar en tu entorno.",
-      "Te sientes comprometido con el éxito de tu equipo.",
-      "Tus líderes te brindan apoyo cuando enfrentas desafíos.",
-      "Tienes acceso a la información que necesitas para hacer bien tu trabajo.",
-      "Tus compañeros cooperan contigo de forma armoniosa.",
-      "Tus superiores se interesan por tu crecimiento personal.",
-      "Siempre das lo mejor de ti en cada tarea.",
-      "Buscas mejorar continuamente en lo que haces.",
-      "La información fluye con claridad a tu alrededor.",
-      "Tus metas son inspiradoras y desafiantes.",
-      "Participas en definir tus objetivos.",
-      "Sientes que eres clave para el éxito colectivo.",
-      "La retroalimentación que recibes te ayuda a crecer.",
-      "Tu equipo tiene una relación armoniosa.",
-      "Tienes libertad para tomar decisiones en tu rol.",
-      "Se valora cuando das tu máximo esfuerzo.",
-      "Estás profundamente comprometido con tu misión.",
-      "Recibes la preparación necesaria para brillar.",
-      "Hay canales claros para comunicarte.",
-      "Tu equipo funciona como una verdadera familia.",
-      "Reconocen tus logros con sinceridad.",
-      "Cada día buscas hacer las cosas mejor.",
-      "Tus responsabilidades están bien definidas.",
-      "Puedes interactuar fácilmente con personas influyentes.",
-      "Siempre buscas hacer tu mejor trabajo.",
-      "Lo que haces te permite aprender y crecer.",
-      "Tu trabajo diario contribuye a tu desarrollo personal.",
-      "Tienes sistemas que te ayudan a organizarte.",
-      "Juntos superan cualquier obstáculo.",
-      "Los recursos se usan con sabiduría.",
-      "Te ofrecen oportunidades para capacitarte.",
-      "Tu labor diaria es estimulante y significativa.",
-      "Tienes guías claras para cumplir tus tareas.",
-      "La comunicación interna es abierta y fluida.",
-      "Tu recompensa es justa comparada con otros.",
-      "Tu entorno promueve tu crecimiento profesional.",
-      "Estás orgulloso de lo que haces cada día.",
-      "Tus objetivos están claramente definidos.",
-      "Tus líderes escuchan tus ideas con atención.",
-      "Tus metas están alineadas con un propósito mayor.",
-      "Se fomenta la creatividad e innovación.",
-      "Conoces la visión, misión y valores de tu entorno.",
-      "Sigues planes y métodos bien establecidos.",
-      "Existe colaboración entre todos los equipos.",
-      "Cuentas con herramientas que facilitan tu trabajo.",
-      "Reconocen tus logros con alegría.",
-      "Tu entorno es ideal para tu bienestar.",
-      "Siempre se actúa con justicia y equidad.",
-      "Estás al tanto de lo que sucede en otros equipos.",
-      "Tu recompensa refleja tu esfuerzo y resultados."
-    ];
-
-    const likertOptions = [
-      { value: 1, label: "Nunca" },
-      { value: 2, label: "Rara vez" },
-      { value: 3, label: "A veces" },
-      { value: 4, label: "Casi siempre" },
-      { value: 5, label: "Siempre" }
-    ];
-
-    const princesses = [
-      { name: "Ariel", movie: "La Sirenita", desc: "Valiente, curiosa y con un espíritu libre que persigue sus sueños más allá del horizonte.", color: "ariel" },
-      { name: "Belle", movie: "La Bella y la Bestia", desc: "Inteligente, amante de los libros y con un corazón que ve más allá de las apariencias.", color: "belle" },
-      { name: "Jasmine", movie: "Aladdín", desc: "Audaz, justa y con un alma que anhela libertad y aventura.", color: "jasmine" },
-      { name: "Moana", movie: "Moana", desc: "Líder nata, decidida y guiada por su conexión con el océano y su pueblo.", color: "moana" },
-      { name: "Tiana", movie: "La Princesa y el Sapo", desc: "Trabajadora, realista y con una ética que convierte sus sueños en realidad.", color: "tiana" }
-    ];
-
-    // Generar preguntas
-    const form = document.getElementById('surveyForm');
-    questions.forEach((q, i) => {
-      const idx = i + 1;
-      const div = document.createElement('div');
-      div.className = 'bg-gradient-to-r from-pink-50/50 to-purple-50/50 p-3 rounded-xl border border-pink-200';
-      div.innerHTML = `<p class="font-medium mb-2"><span class="font-bold text-purple-700">${idx}.</span> ${q}</p><div class="flex flex-wrap gap-1 justify-center" id="q${idx}"></div>`;
-      form.appendChild(div);
-
-      const opts = div.querySelector(`#q${idx}`);
-      likertOptions.forEach(opt => {
-        const id = `q${idx}_opt${opt.value}`;
-        opts.innerHTML += `
-          <div class="flex items-center">
-            <input type="radio" name="q${idx}" id="${id}" value="${opt.value}" class="radio-custom hidden">
-            <label for="${id}" class="cursor-pointer px-2.5 py-1.5 rounded-full border text-xs font-medium">${opt.label}</label>
-          </div>
-        `;
-      });
-    });
-
-    document.getElementById('submitBtn').classList.remove('hidden');
-
-    // Procesar resultado
-    document.getElementById('submitBtn').addEventListener('click', (e) => {
-      e.preventDefault();
-      let total = 0;
-      let complete = true;
-
-      for (let i = 1; i <= 50; i++) {
-        const sel = document.querySelector(`input[name="q${i}"]:checked`);
-        if (!sel) {
-          complete = false;
-          break;
-        }
-        total += parseInt(sel.value);
+    const interpretations = {
+      "Muy desfavorable": {
+        range: "50–89",
+        color: "border-red-500",
+        meaning: "El ambiente laboral es percibido de manera muy negativa. Existe una baja satisfacción con las condiciones de trabajo, supervisión, comunicación y oportunidades de desarrollo. Este nivel sugiere riesgos psicosociales significativos y posible desmotivación colectiva.",
+        recommendations: "Se recomienda una intervención urgente: diagnóstico por factores, reuniones de retroalimentación segura, revisión de políticas de remuneración y supervisión, y programas de bienestar laboral. Priorizar la escucha activa y la participación de los trabajadores en la solución de problemas."
+      },
+      "Desfavorable": {
+        range: "90–129",
+        color: "border-orange-500",
+        meaning: "La percepción del clima laboral es predominantemente negativa. Aunque hay algunos aspectos funcionales, predominan las insatisfacciones en áreas clave como comunicación, reconocimiento o condiciones laborales.",
+        recommendations: "Implementar acciones correctivas: fortalecer canales de comunicación, capacitar a supervisores en liderazgo participativo, revisar equidad en remuneraciones y reconocer logros. Promover espacios de diálogo y participación en la toma de decisiones."
+      },
+      "Media": {
+        range: "130–169",
+        color: "border-yellow-500",
+        meaning: "El clima laboral es percibido de forma ambivalente. Hay aspectos positivos, pero también áreas de mejora. No hay una clara tendencia hacia la satisfacción o insatisfacción, lo que puede indicar estancamiento o falta de impulso organizacional.",
+        recommendations: "Fortalecer lo positivo y atender lo deficitario: identificar fortalezas mediante encuestas cualitativas, establecer metas claras de mejora, fomentar el desarrollo profesional y mejorar la retroalimentación. Incentivar la innovación y el trabajo en equipo."
+      },
+      "Favorable": {
+        range: "170–209",
+        color: "border-teal-500",
+        meaning: "El ambiente laboral es percibido positivamente. Los trabajadores se sienten valorados, tienen buenas condiciones y una supervisión efectiva. Hay compromiso y fluidez en la comunicación, aunque aún hay margen de mejora.",
+        recommendations: "Consolidar las buenas prácticas: reconocer públicamente los logros, invertir en desarrollo continuo, fomentar la autonomía y la creatividad. Asegurar que las buenas condiciones se mantengan incluso en periodos de cambio o presión."
+      },
+      "Muy favorable": {
+        range: "210–250",
+        color: "border-green-500",
+        meaning: "El clima laboral es percibido de manera excelente. Existe un alto nivel de satisfacción, compromiso, apoyo mutuo y condiciones óptimas. La organización es vista como un entorno saludable, motivador y propicio para el desarrollo personal y colectivo.",
+        recommendations: "Mantener y proteger este clima: documentar las buenas prácticas, formar líderes internos, compartir el modelo con otras áreas. Evitar la complacencia y seguir innovando en bienestar, inclusión y desarrollo profesional."
       }
+    };
 
-      if (!complete) {
-        alert("¡Por favor responde todas las preguntas! 💖");
+    function getCategory(score) {
+      if (score >= 210) return "Muy favorable";
+      if (score >= 170) return "Favorable";
+      if (score >= 130) return "Media";
+      if (score >= 90) return "Desfavorable";
+      return "Muy desfavorable";
+    }
+
+    document.getElementById('checkBtn').addEventListener('click', () => {
+      const input = document.getElementById('scoreInput');
+      const score = parseInt(input.value);
+      const resultSection = document.getElementById('resultSection');
+      const categoryCard = document.getElementById('categoryCard');
+      const meaningText = document.getElementById('meaningText');
+      const recommendationsText = document.getElementById('recommendationsText');
+      const whatsappBtnContainer = document.getElementById('whatsappBtnContainer');
+
+      if (isNaN(score) || score < 50 || score > 250) {
+        alert("Por favor ingresa un puntaje válido entre 50 y 250.");
         return;
       }
 
-      // Mapeo según baremos del manual (50-89 → muy desfavorable → Ariel, etc.)
-      let idx;
-      if (total <= 89) idx = 0;        // Muy desfavorable
-      else if (total <= 129) idx = 1;  // Desfavorable
-      else if (total <= 169) idx = 2;  // Media
-      else if (total <= 209) idx = 3;  // Favorable
-      else idx = 4;                    // Muy favorable
+      const category = getCategory(score);
+      const data = interpretations[category];
 
-      const p = princesses[idx];
-
-      document.getElementById('princessResult').innerHTML = `
-        <div class="text-5xl mb-3">👑</div>
-        <p class="text-2xl font-bold princess-script text-${p.color}">${p.name}</p>
-        <p class="text-base text-gray-700 mt-1">de <strong>${p.movie}</strong></p>
-        <p class="mt-3 px-2 text-gray-800 text-sm">${p.desc}</p>
-        <p class="mt-2 text-xs text-gray-600">Puntaje: ${total}/250</p>
+      categoryCard.className = `interpretation-card bg-white rounded-xl shadow p-5 border-l-4 ${data.color}`;
+      categoryCard.innerHTML = `
+        <h2 class="text-xl font-bold text-gray-800">Tu categoría: <span class="text-purple-600">${category}</span></h2>
+        <p class="text-gray-600 mt-1">Rango: ${data.range} • Puntaje: ${score}/250</p>
       `;
 
-      const msg = encodeURIComponent(
-        `¡Hola! 🌟\nAcabo de descubrir qué princesa Disney soy:\n\n${p.name} de "${p.movie}" 👑\nPuntaje: ${total}/250\n\n¡Gracias por esta aventura mágica! 💖`
-      );
-      const waLink = `https://wa.me/51984006844?text=${msg}`;
+      meaningText.textContent = data.meaning;
+      recommendationsText.textContent = data.recommendations;
 
-      document.getElementById('whatsappBtnContainer').innerHTML = `
-        <a href="${waLink}" target="_blank" class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 px-5 rounded-full text-base transition shadow w-full max-w-xs mx-auto">
-          <i class="fab fa-whatsapp mr-2"></i> Enviar por WhatsApp
+      // Mensaje para WhatsApp
+      const fullMessage = `📊 *INTERPRETACIÓN ESCALA CLIMA LABORAL CL-SPC*\n\n` +
+        `Puntaje total: ${score}/250\n` +
+        `Categoría: ${category}\n\n` +
+        `🔍 *Significado:*\n${data.meaning}\n\n` +
+        `💡 *Recomendaciones:*\n${data.recommendations}\n\n` +
+        `📌 Basado en el Manual CL-SPC (Palma Carrillo, 2004)`;
+
+      const encodedMessage = encodeURIComponent(fullMessage);
+      const whatsappUrl = `https://wa.me/51984006844?text=${encodedMessage}`;
+
+      whatsappBtnContainer.innerHTML = `
+        <a href="${whatsappUrl}" target="_blank" class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full text-base transition shadow">
+          <i class="fab fa-whatsapp mr-2"></i> Enviar interpretación por WhatsApp
         </a>
+        <p class="mt-3 text-sm text-gray-600">Al hacer clic, se abrirá WhatsApp. Solo debes presionar "Enviar".</p>
       `;
 
-      document.getElementById('resultSection').classList.remove('hidden');
-      document.querySelector('.max-w-2xl').classList.add('hidden');
+      resultSection.classList.remove('hidden');
     });
   </script>
 </body>
